@@ -15,7 +15,15 @@ new Vue({
 		addTask: function(t,d,e) {
 			e.preventDefault();
 			if(this.task === "" || this.description ==="") {
-				alert("Please fill all fields");
+				//alert("Please fill all fields");
+				Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: 'Please fill all the fields',
+					showConfirmButton: false,
+					timer: 1600
+				});
+
 			} else {
 				this.tasks.push({
 					task: this.task,
@@ -24,7 +32,17 @@ new Vue({
 				localStorage.setItem('tasks',JSON.stringify(this.tasks));
 				this.task = "";
 				this.description = "";
-			}	
+
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Success',
+					showConfirmButton: false,
+					timer: 1600
+				});
+
+			}
+				
 		},
 		editTask: function(t,i) {
 			this.edit = !this.edit;
@@ -56,6 +74,14 @@ new Vue({
 		deleteTask: function(i) {
 			this.tasks.splice(i,1)
 			localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+			Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: 'The task has been delete successful',
+				showConfirmButton: false,
+				timer: 1600
+			});
 		}
 	},
 	created: function(){
